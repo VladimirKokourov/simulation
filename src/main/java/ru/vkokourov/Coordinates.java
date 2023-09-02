@@ -1,4 +1,5 @@
 package ru.vkokourov;
 
-public class Coordinates {
+public record Coordinates(int x, int y) {
 }
+
