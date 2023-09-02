@@ -1,10 +1,16 @@
 package ru.vkokourov;
 
 public class Simulation {
-    private Map map;
+
+    private final Renderer renderer;
     private int countTurn;
-    private Render render;
 
+    public Simulation(Renderer renderer) {
+        this.renderer = renderer;
+        countTurn = 0;
+    }
 
-
+    public void init() {
+        renderer.render();
+    }
 }
