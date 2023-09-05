@@ -62,6 +62,7 @@ public class Herbivore extends Creature {
         if (!map.isTypeOfEntityExist(Grass.class)) {
             return pathToFood;
         }
+
         LinkedList<Coordinates> queue = new LinkedList<>();
         Set<Coordinates> checked = new HashSet<>();
         HashMap<Coordinates, Coordinates> parents = new HashMap<>();
@@ -82,6 +83,10 @@ public class Herbivore extends Creature {
                     queue.addFirst(neighbour);
                 }
             }
+        }
+
+        if (food == null) {
+            return pathToFood;
         }
 
         Coordinates child = food;

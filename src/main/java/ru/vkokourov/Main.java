@@ -52,41 +52,18 @@ public class Main {
         map.addEntity(new Tree(map, new Coordinates(8, 8)));
         map.addEntity(new Tree(map, new Coordinates(9, 8)));
         map.addEntity(new Tree(map, new Coordinates(9, 10)));
+        map.addEntity(new Tree(map, new Coordinates(7, 10)));
+        map.addEntity(new Tree(map, new Coordinates(10, 8)));
         map.addEntity(new Grass(map, new Coordinates(9, 9)));
+        map.addEntity(new Grass(map, new Coordinates(1, 8)));
+        map.addEntity(new Grass(map, new Coordinates(5, 1)));
         Renderer renderer = new Renderer(map);
         System.out.println();
-        renderer.render();
-        herbivore.makeMove();
-        System.out.println();
-        renderer.render();
-        herbivore.makeMove();
-        System.out.println();
+        for (int i = 0; i < 20; i++) {
+            renderer.render();
+            herbivore.makeMove();
+            System.out.println();
+        }
 
-        renderer.render();
-        herbivore.makeMove();
-        System.out.println();
-
-        renderer.render();
-        herbivore.makeMove();
-        System.out.println();
-
-        renderer.render();
-        herbivore.makeMove();
-        System.out.println();
-        renderer.render();
-        herbivore.makeMove();
-        System.out.println();
-        renderer.render();
-        herbivore.makeMove();
-        System.out.println();
-        renderer.render();
-        herbivore.makeMove();
-        System.out.println();
-        renderer.render();
-        herbivore.makeMove();
-        System.out.println();
-        renderer.render();
-        herbivore.makeMove();
-        System.out.println();
     }
 }
