@@ -36,16 +36,57 @@ public class Main {
     public static void main(String[] args) {
 
         Map map = new Map(10,10);
-        map.addEntity(new Grass(map, new Coordinates(1,1)));
-        map.addEntity(new Herbivore(map, new Coordinates(2,2)));
+        Herbivore herbivore = new Herbivore(map, new Coordinates(2,2));
+        map.addEntity(herbivore);
         map.addEntity(new Predator(map, new Coordinates(3,4)));
         map.addEntity(new Rock(map, new Coordinates(5,4)));
         map.addEntity(new Tombstone(map, new Coordinates(7,7)));
-        map.addEntity(new Tree(map, new Coordinates(8,1)));
-        map.addEntity(new Tree(map, new Coordinates(1,9)));
-        map.addEntity(new Tree(map, new Coordinates(5, 10)));
-        map.addEntity(new Grass(map, new Coordinates(5, 10)));
+        map.addEntity(new Tree(map, new Coordinates(1,3)));
+        map.addEntity(new Tree(map, new Coordinates(2,3)));
+        map.addEntity(new Tree(map, new Coordinates(3, 3)));
+        map.addEntity(new Tree(map, new Coordinates(4, 3)));
+        map.addEntity(new Tree(map, new Coordinates(5, 3)));
+        map.addEntity(new Tree(map, new Coordinates(7, 6)));
+        map.addEntity(new Tree(map, new Coordinates(7, 8)));
+        map.addEntity(new Tree(map, new Coordinates(7, 9)));
+        map.addEntity(new Tree(map, new Coordinates(8, 8)));
+        map.addEntity(new Tree(map, new Coordinates(9, 8)));
+        map.addEntity(new Tree(map, new Coordinates(9, 10)));
+        map.addEntity(new Grass(map, new Coordinates(9, 9)));
         Renderer renderer = new Renderer(map);
+        System.out.println();
         renderer.render();
+        herbivore.makeMove();
+        System.out.println();
+        renderer.render();
+        herbivore.makeMove();
+        System.out.println();
+
+        renderer.render();
+        herbivore.makeMove();
+        System.out.println();
+
+        renderer.render();
+        herbivore.makeMove();
+        System.out.println();
+
+        renderer.render();
+        herbivore.makeMove();
+        System.out.println();
+        renderer.render();
+        herbivore.makeMove();
+        System.out.println();
+        renderer.render();
+        herbivore.makeMove();
+        System.out.println();
+        renderer.render();
+        herbivore.makeMove();
+        System.out.println();
+        renderer.render();
+        herbivore.makeMove();
+        System.out.println();
+        renderer.render();
+        herbivore.makeMove();
+        System.out.println();
     }
 }
