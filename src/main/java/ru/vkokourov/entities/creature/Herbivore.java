@@ -30,7 +30,7 @@ public class Herbivore extends Creature {
         Stack<Coordinates> pathToFood;
         while (speed > 0) {
             eatGrass();
-            pathToFood = findPathToFood();
+            pathToFood = map.findPath(coordinates, Grass.class);
             if (pathToFood.size() != 0) {
                 map.removeEntity(coordinates);
                 coordinates = pathToFood.pop();
@@ -53,50 +53,5 @@ public class Herbivore extends Creature {
                 .filter(c -> map.getEntity(c) instanceof Grass)
                 .findFirst();
         grassCoordinates.ifPresent(map::removeEntity);
-    }
-
-    @Override
-    protected Stack<Coordinates> findPathToFood() {
-
-        Stack<Coordinates> pathToFood = new Stack<>();
-        if (!map.isTypeOfEntityExist(Grass.class)) {
-            return pathToFood;
-        }
-
-        LinkedList<Coordinates> queue = new LinkedList<>();
-        Set<Coordinates> checked = new HashSet<>();
-        HashMap<Coordinates, Coordinates> parents = new HashMap<>();
-        Coordinates food = null;
-
-        queue.add(coordinates);
-        checked.add(coordinates);
-        while (!queue.isEmpty()) {
-            Coordinates current = queue.removeLast();
-            if (map.getEntity(current) instanceof Grass) {
-                food = current;
-                break;
-            }
-            for (Coordinates neighbour : map.getNeighbours(current)) {
-                if (!checked.contains(neighbour) && (map.isEmptySquare(neighbour) || map.getEntity(neighbour) instanceof Grass)) {
-                    checked.add(neighbour);
-                    parents.put(neighbour, current);
-                    queue.addFirst(neighbour);
-                }
-            }
-        }
-
-        if (food == null) {
-            return pathToFood;
-        }
-
-        Coordinates child = food;
-        Coordinates parent = parents.get(child);
-        while (parent != coordinates) {
-            pathToFood.push(parent);
-            child = parent;
-            parent = parents.get(child);
-        }
-
-        return pathToFood;
     }
 }
