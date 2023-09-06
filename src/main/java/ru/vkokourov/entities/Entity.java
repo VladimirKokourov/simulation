@@ -2,6 +2,7 @@ package ru.vkokourov.entities;
 
 import ru.vkokourov.Coordinates;
 import ru.vkokourov.Map;
+import ru.vkokourov.entities.creature.Creature;
 
 public abstract class Entity implements Mortal {
     protected final Map map;
@@ -26,5 +27,13 @@ public abstract class Entity implements Mortal {
 
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
+    }
+
+    public Creature getCreature() {
+        if (this instanceof Creature) {
+            return (Creature) this;
+        } else {
+            return null;
+        }
     }
 }

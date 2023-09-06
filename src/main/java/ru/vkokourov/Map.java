@@ -1,20 +1,23 @@
 package ru.vkokourov;
 
 import ru.vkokourov.entities.Entity;
-import ru.vkokourov.entities.plant.Grass;
+import ru.vkokourov.entities.creature.Creature;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Map {
 
     private final int weight;
     private final int height;
     private final HashMap<Coordinates, Entity> entities;
+    private final Random random;
 
     public Map(int weight, int height) {
         this.weight = weight;
         this.height = height;
         entities = new HashMap<>();
+        random = new Random();
     }
 
     public void addEntity(Entity entity) {
@@ -107,6 +110,24 @@ public class Map {
             return false;
         }
         return getEntity(coordinates).getClass().getSimpleName().equals(entity.getSimpleName());
+    }
+
+    public Coordinates getCoordinatesRandomEmptySquare() {
+        int x;
+        int y;
+        do {
+            x = random.nextInt(weight + 1);
+            y = random.nextInt(height + 1);
+        } while (!isEmptySquare(new Coordinates(x, y)));
+        return new Coordinates(x, y);
+    }
+
+    public List<Creature> getAllCreatures() {
+        List<Creature> creatures = (entities.values().stream()
+                .filter(entity -> entity instanceof Creature)
+                .map(Entity::getCreature)
+                .toList());
+        return creatures.stream().map(Entity::getCreature).collect(Collectors.toList());
     }
 
     public int getWeight() {

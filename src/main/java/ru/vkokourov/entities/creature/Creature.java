@@ -8,8 +8,6 @@ import java.util.Stack;
 
 public abstract class Creature extends Entity {
 
-    public static final int START_HUNGER_VALUE = 0;
-
     protected int amountOfMoves;
     protected int speed;
     protected int hunger;
@@ -19,7 +17,7 @@ public abstract class Creature extends Entity {
 
     public Creature(Map map, Coordinates coordinates) {
         super(map, coordinates);
-        hunger = START_HUNGER_VALUE;
+        hunger = 0;
     }
 
     public abstract void getSatiety();

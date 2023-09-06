@@ -35,41 +35,10 @@ import ru.vkokourov.entities.plant.Tree;
 public class Main {
     public static void main(String[] args) {
 
-        Map map = new Map(10,10);
-        Herbivore herbivore = new Herbivore(map, new Coordinates(2,2));
-        Predator predator = new Predator(map, new Coordinates(1, 9));
-        map.addEntity(herbivore);
-        map.addEntity(predator);
-        map.addEntity(new Predator(map, new Coordinates(3,4)));
-        map.addEntity(new Rock(map, new Coordinates(5,4)));
-        map.addEntity(new Tombstone(map, new Coordinates(7,7)));
-        map.addEntity(new Tree(map, new Coordinates(1,3)));
-        map.addEntity(new Tree(map, new Coordinates(2,3)));
-        map.addEntity(new Tree(map, new Coordinates(3, 3)));
-        map.addEntity(new Tree(map, new Coordinates(4, 3)));
-        map.addEntity(new Tree(map, new Coordinates(5, 3)));
-        map.addEntity(new Tree(map, new Coordinates(7, 6)));
-        map.addEntity(new Tree(map, new Coordinates(7, 8)));
-        map.addEntity(new Tree(map, new Coordinates(7, 9)));
-        map.addEntity(new Tree(map, new Coordinates(8, 8)));
-        map.addEntity(new Tree(map, new Coordinates(9, 8)));
-        map.addEntity(new Tree(map, new Coordinates(9, 10)));
-        map.addEntity(new Tree(map, new Coordinates(7, 10)));
-        map.addEntity(new Tree(map, new Coordinates(10, 8)));
-        map.addEntity(new Grass(map, new Coordinates(9, 9)));
-        map.addEntity(new Grass(map, new Coordinates(1, 8)));
-        map.addEntity(new Grass(map, new Coordinates(5, 1)));
-        System.out.println(map.isTypeOfEntityOnTheCoordinates(Grass.class, new Coordinates(5,1)));
-        Renderer renderer = new Renderer(map);
-        System.out.println();
-        for (int i = 0; i < 20; i++) {
-            renderer.render();
-            herbivore.makeMove();
-            predator.makeMove();
-            System.out.println(herbivore);
-            System.out.println(predator);
-            System.out.println();
+        Simulation simulation = new Simulation();
+        simulation.init();
+        while (!simulation.isGameOver()) {
+            simulation.makeTurn();
         }
-
     }
 }
