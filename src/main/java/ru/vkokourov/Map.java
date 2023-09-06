@@ -79,7 +79,7 @@ public class Map {
             for (Coordinates neighbour : getNeighbours(current)) {
                 if (!checked.contains(neighbour)
                         &&
-                        (isEmptySquare(neighbour) || isTypeOfEntityOnTheCoordinates(goal, current))) {
+                        (isEmptySquare(neighbour) || isTypeOfEntityOnTheCoordinates(goal, neighbour))) {
                     checked.add(neighbour);
                     parents.put(neighbour, current);
                     queue.addFirst(neighbour);
@@ -102,7 +102,10 @@ public class Map {
         return path;
     }
 
-    private boolean isTypeOfEntityOnTheCoordinates(Class<? extends Entity> entity, Coordinates coordinates) {
+    public boolean isTypeOfEntityOnTheCoordinates(Class<? extends Entity> entity, Coordinates coordinates) {
+        if (getEntity(coordinates) == null) {
+            return false;
+        }
         return getEntity(coordinates).getClass().getSimpleName().equals(entity.getSimpleName());
     }
 
