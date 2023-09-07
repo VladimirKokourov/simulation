@@ -12,6 +12,17 @@ public class Herbivore extends Creature {
         amountOfMoves = speed;
         maxHunger = 20;
         satiety = 5;
+        maxAge = 25;
         food = Grass.class;
+    }
+
+    @Override
+    public void reproduce() {
+        if (map.getNeighbours(coordinates).stream().anyMatch(c -> map.isTypeOfEntityOnTheCoordinates(Herbivore.class, c))) {
+            map.getNeighbours(coordinates).stream()
+                    .filter(map::isEmptySquare)
+                    .findFirst()
+                    .ifPresent(reproduceCoordinates -> new Herbivore(map, reproduceCoordinates));
+        }
     }
 }

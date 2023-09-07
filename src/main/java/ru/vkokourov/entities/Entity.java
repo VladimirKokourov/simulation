@@ -7,16 +7,13 @@ public abstract class Entity {
     protected final Map map;
     protected Coordinates coordinates;
     protected int age;
+    protected int maxAge;
 
     public Entity(Map map, Coordinates coordinates) {
         this.map = map;
         this.coordinates = coordinates;
         map.addEntity(this);
         age = 0;
-    }
-
-    public void death() {
-        map.removeEntity(coordinates);
     }
 
     public Coordinates getCoordinates() {

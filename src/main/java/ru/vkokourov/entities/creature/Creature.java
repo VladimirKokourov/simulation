@@ -2,12 +2,13 @@ package ru.vkokourov.entities.creature;
 
 import ru.vkokourov.Coordinates;
 import ru.vkokourov.Map;
+import ru.vkokourov.entities.Alive;
 import ru.vkokourov.entities.Entity;
 import ru.vkokourov.entities.other.Tombstone;
 
 import java.util.Stack;
 
-public abstract class Creature extends Entity {
+public abstract class Creature extends Entity implements Alive {
 
     protected int amountOfMoves;
     protected int speed;
@@ -18,25 +19,26 @@ public abstract class Creature extends Entity {
 
     public Creature(Map map, Coordinates coordinates) {
         super(map, coordinates);
-        hunger = 0;
+        hunger = 5;
     }
 
     public void makeMove() {
-        hunger++;
-        if (hunger >= maxHunger) {
-            death();
-            return;
-        }
         if (!map.isTypeOfEntityExist(food)) {
             return;
         }
         amountOfMoves = speed;
         while (amountOfMoves > 0) {
-            Stack<Coordinates> pathToFood = map.findPath(coordinates, food);
-            if (pathToFood.size() != 0) {
+            // decide priority goal for going
+            Class<? extends Entity> goal = isReadyToReproduce() ? this.getClass() : food;
+
+            Stack<Coordinates> pathToGoal = map.findPath(coordinates, goal);
+
+            if (pathToGoal.size() != 0) {
                 map.removeEntity(coordinates);
-                coordinates = pathToFood.pop();
+                coordinates = pathToGoal.pop();
                 map.addEntity(this);
+            } else if (isReadyToReproduce()) {
+                reproduce();
             } else {
                 eat(food);
             }
@@ -44,13 +46,18 @@ public abstract class Creature extends Entity {
         }
     }
 
-    protected void eat(Class<? extends Entity> food) {
+    private boolean isReadyToReproduce() {
+        return age > 5 && hunger < 10;
+    }
+
+    protected void eat(Class<? extends Entity> foodClazz) {
         var foodCoordinates = map.getNeighbours(coordinates).stream()
-                .filter(c -> map.isTypeOfEntityOnTheCoordinates(food, c))
+                .filter(c -> map.isTypeOfEntityOnTheCoordinates(foodClazz, c))
                 .findFirst()
                 .orElse(null);
         if (foodCoordinates != null) {
-            map.getEntity(foodCoordinates).death();
+            Alive food = (Alive) map.getEntity(foodCoordinates);
+            food.death();
             getSatiety();
         }
     }
@@ -64,8 +71,17 @@ public abstract class Creature extends Entity {
     }
 
     @Override
+    public void grow() {
+        hunger += speed;
+        age++;
+        if (age >= maxAge || hunger >= maxHunger) {
+            death();
+        }
+    }
+
+    @Override
     public void death() {
-        super.death();
-        map.addEntity(new Tombstone(map, coordinates));
+        map.removeEntity(coordinates);
+        new Tombstone(map, coordinates);
     }
 }

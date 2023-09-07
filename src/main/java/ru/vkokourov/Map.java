@@ -1,5 +1,6 @@
 package ru.vkokourov;
 
+import ru.vkokourov.entities.Alive;
 import ru.vkokourov.entities.Entity;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
@@ -75,7 +76,7 @@ public class Map {
         checked.add(startCoordinates);
         while (!queue.isEmpty()) {
             Coordinates current = queue.removeLast();
-            if (isTypeOfEntityOnTheCoordinates(goal, current)) {
+            if (isTypeOfEntityOnTheCoordinates(goal, current) && current != startCoordinates) {
                 goalCoordinates = current;
                 break;
             }
@@ -120,6 +121,16 @@ public class Map {
             y = random.nextInt(height) + 1;
         } while (!isEmptySquare(new Coordinates(x, y)));
         return new Coordinates(x, y);
+    }
+
+    public List<Alive> getAliveEntities() {
+        List<Alive> aliveEntities = new ArrayList<>();
+        for (Entity entity : entities.values()) {
+            if (entity instanceof Alive) {
+                aliveEntities.add((Alive) entity);
+            }
+        }
+        return aliveEntities;
     }
 
     public List<Predator> getAllPredators() {
