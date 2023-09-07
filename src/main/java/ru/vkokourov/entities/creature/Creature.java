@@ -3,6 +3,7 @@ package ru.vkokourov.entities.creature;
 import ru.vkokourov.Coordinates;
 import ru.vkokourov.Map;
 import ru.vkokourov.entities.Entity;
+import ru.vkokourov.entities.Tombstone;
 
 import java.util.Stack;
 
@@ -12,7 +13,7 @@ public abstract class Creature extends Entity {
     protected int speed;
     protected int hunger;
     protected int maxHunger;
-    protected int hp;
+    protected int satiety;
     protected Class<? extends Entity> food;
 
     public Creature(Map map, Coordinates coordinates) {
@@ -20,12 +21,16 @@ public abstract class Creature extends Entity {
         hunger = 0;
     }
 
-    public abstract void getSatiety();
-
     public void makeMove() {
+        hunger++;
+        if (hunger >= maxHunger) {
+            death();
+            return;
+        }
         if (!map.isTypeOfEntityExist(food)) {
             return;
         }
+        amountOfMoves = speed;
         while (amountOfMoves > 0) {
             Stack<Coordinates> pathToFood = map.findPath(coordinates, food);
             if (pathToFood.size() != 0) {
@@ -35,16 +40,8 @@ public abstract class Creature extends Entity {
             } else {
                 eat(food);
             }
-
-            if (hunger == maxHunger) {
-                hp--;
-            } else {
-                hunger++;
-            }
-
             amountOfMoves--;
         }
-        amountOfMoves = speed;
     }
 
     protected void eat(Class<? extends Entity> food) {
@@ -53,8 +50,22 @@ public abstract class Creature extends Entity {
                 .findFirst()
                 .orElse(null);
         if (foodCoordinates != null) {
-            map.removeEntity(foodCoordinates);
+            map.getEntity(foodCoordinates).death();
             getSatiety();
         }
+    }
+
+    public void getSatiety() {
+        if (hunger < satiety) {
+            hunger = 0;
+        } else {
+            hunger -= satiety;
+        }
+    }
+
+    @Override
+    public void death() {
+        super.death();
+        map.addEntity(new Tombstone(map, coordinates));
     }
 }

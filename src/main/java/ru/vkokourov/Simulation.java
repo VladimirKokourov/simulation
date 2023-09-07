@@ -1,6 +1,5 @@
 package ru.vkokourov;
 
-import ru.vkokourov.entities.Entity;
 import ru.vkokourov.entities.Rock;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
@@ -37,7 +36,7 @@ public class Simulation {
     }
 
     public void makeTurn() {
-        for (Herbivore herbivore : map.getAllHerbivors()) {
+        for (Herbivore herbivore : map.getAllHerbivores()) {
             herbivore.makeMove();
         }
         for (Predator predator : map.getAllPredators()) {
@@ -46,7 +45,7 @@ public class Simulation {
         renderer.render();
         countTurn++;
         System.out.println("Turn " + countTurn);
-        if (!map.isTypeOfEntityExist(Herbivore.class) || !map.isTypeOfEntityExist(Predator.class)) {
+        if (!map.isTypeOfEntityExist(Herbivore.class) && !map.isTypeOfEntityExist(Predator.class)) {
             isGameOver = true;
         }
     }

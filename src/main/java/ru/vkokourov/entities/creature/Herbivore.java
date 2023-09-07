@@ -5,23 +5,13 @@ import ru.vkokourov.Map;
 import ru.vkokourov.entities.plant.Grass;
 
 public class Herbivore extends Creature {
-    public static final int SATIETY_VALUE = 10;
 
     public Herbivore(Map map, Coordinates coordinates) {
         super(map, coordinates);
         speed = 2;
         amountOfMoves = speed;
         maxHunger = 20;
-        hp = 30;
+        satiety = 5;
         food = Grass.class;
-    }
-
-    @Override
-    public void getSatiety() {
-        if (hunger < SATIETY_VALUE) {
-            hunger = 0;
-        } else {
-            hunger -= SATIETY_VALUE;
-        }
     }
 }

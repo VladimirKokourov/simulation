@@ -2,7 +2,6 @@ package ru.vkokourov.entities;
 
 import ru.vkokourov.Coordinates;
 import ru.vkokourov.Map;
-import ru.vkokourov.entities.creature.Creature;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
 
@@ -20,7 +19,7 @@ public abstract class Entity implements Mortal {
 
     @Override
     public void death() {
-        map.addEntity(new Tombstone(map, coordinates));
+        map.removeEntity(coordinates);
     }
 
     public Coordinates getCoordinates() {

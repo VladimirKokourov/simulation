@@ -1,12 +1,10 @@
 package ru.vkokourov;
 
 import ru.vkokourov.entities.Entity;
-import ru.vkokourov.entities.creature.Creature;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Map {
 
@@ -132,7 +130,7 @@ public class Map {
                 .toList();
     }
 
-    public List<Herbivore> getAllHerbivors() {
+    public List<Herbivore> getAllHerbivores() {
         return entities.values()
                 .stream()
                 .filter(entity -> entity instanceof Herbivore)
