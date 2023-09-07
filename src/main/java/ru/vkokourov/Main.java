@@ -37,8 +37,13 @@ public class Main {
 
         Simulation simulation = new Simulation();
         simulation.init();
-        while (!simulation.isGameOver()) {
-            simulation.makeTurn();
-        }
+//        while (!simulation.isGameOver()) {
+//            simulation.makeTurn();
+//        }
+
+//        for (int i = 0; i < 30; i++) {
+//            simulation.makeTurn();
+//            System.out.println(simulation.isGameOver());
+//        }
     }
 }

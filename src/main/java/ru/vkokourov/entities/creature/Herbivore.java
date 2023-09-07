@@ -9,7 +9,6 @@ public class Herbivore extends Creature {
 
     public Herbivore(Map map, Coordinates coordinates) {
         super(map, coordinates);
-        map.addEntity(this);
         speed = 2;
         amountOfMoves = speed;
         maxHunger = 20;

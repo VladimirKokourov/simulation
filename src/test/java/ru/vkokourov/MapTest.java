@@ -20,14 +20,15 @@ class MapTest {
     private Herbivore herbivore;
     private Map map;
     private Grass grass;
+    private Predator predator;
 
     @BeforeEach
     void setUp() {
         map = new Map(10, 10);
         grass = new Grass(map, new Coordinates(3, 3));
-        Rock rock = new Rock(map, new Coordinates(1, 2));
+        Rock rock = new Rock(map, new Coordinates(2, 2));
         herbivore = new Herbivore(map, new Coordinates(1, 1));
-        map.addEntity(grass);
+        predator = new Predator(map, new Coordinates(2, 1));
     }
 
     @Test
@@ -48,9 +49,15 @@ class MapTest {
     void findPath() {
         Stack<Coordinates> expected = new Stack<>();
         expected.push(new Coordinates(2, 3));
-        expected.push(new Coordinates(2, 2));
-        expected.push(new Coordinates(2, 1));
+        expected.push(new Coordinates(1, 3));
+        expected.push(new Coordinates(1, 2));
         assertIterableEquals(expected, map.findPath(herbivore.getCoordinates(), Grass.class));
+    }
+
+    @Test
+    void findEmptyPath() {
+        Stack<Coordinates> expected = new Stack<>();
+        assertIterableEquals(expected, map.findPath(predator.getCoordinates(), Herbivore.class));
     }
 
     @Test

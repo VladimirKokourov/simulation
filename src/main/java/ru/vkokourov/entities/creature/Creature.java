@@ -22,29 +22,18 @@ public abstract class Creature extends Entity {
 
     public abstract void getSatiety();
 
-    protected void eat(Class<? extends Entity> food) {
-        var foodCoordinates = map.getNeighbours(coordinates).stream()
-                .filter(c -> map.isTypeOfEntityOnTheCoordinates(food, c))
-                .findFirst()
-                .orElse(null);
-        if (foodCoordinates != null) {
-            map.removeEntity(foodCoordinates);
-            getSatiety();
-        }
-    }
-
-
     public void makeMove() {
         if (!map.isTypeOfEntityExist(food)) {
             return;
         }
         while (amountOfMoves > 0) {
-            eat(food);
             Stack<Coordinates> pathToFood = map.findPath(coordinates, food);
             if (pathToFood.size() != 0) {
                 map.removeEntity(coordinates);
                 coordinates = pathToFood.pop();
                 map.addEntity(this);
+            } else {
+                eat(food);
             }
 
             if (hunger == maxHunger) {
@@ -58,10 +47,20 @@ public abstract class Creature extends Entity {
         amountOfMoves = speed;
     }
 
+    protected void eat(Class<? extends Entity> food) {
+        var foodCoordinates = map.getNeighbours(coordinates).stream()
+                .filter(c -> map.isTypeOfEntityOnTheCoordinates(food, c))
+                .findFirst()
+                .orElse(null);
+        if (foodCoordinates != null) {
+            map.removeEntity(foodCoordinates);
+            getSatiety();
+        }
+    }
+
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + " " +
-                hp + " " +
-                hunger;
+                coordinates;
     }
 }

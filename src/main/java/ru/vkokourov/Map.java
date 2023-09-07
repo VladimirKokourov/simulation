@@ -116,8 +116,8 @@ public class Map {
         int x;
         int y;
         do {
-            x = random.nextInt(weight + 1);
-            y = random.nextInt(height + 1);
+            x = random.nextInt(weight) + 1;
+            y = random.nextInt(height) + 1;
         } while (!isEmptySquare(new Coordinates(x, y)));
         return new Coordinates(x, y);
     }
@@ -125,9 +125,9 @@ public class Map {
     public List<Creature> getAllCreatures() {
         List<Creature> creatures = (entities.values().stream()
                 .filter(entity -> entity instanceof Creature)
-                .map(Entity::getCreature)
+                .map(Entity::castCreature)
                 .toList());
-        return creatures.stream().map(Entity::getCreature).collect(Collectors.toList());
+        return creatures.stream().map(Entity::castCreature).collect(Collectors.toList());
     }
 
     public int getWeight() {

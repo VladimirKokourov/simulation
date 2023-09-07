@@ -20,16 +20,16 @@ public class Simulation {
     }
 
     public void init() {
-        for (int i = 0; i < 20; i++) {
-            map.addEntity(new Grass(map, map.getCoordinatesRandomEmptySquare()));
-            map.addEntity(new Rock(map, map.getCoordinatesRandomEmptySquare()));
-            map.addEntity(new Tree(map, map.getCoordinatesRandomEmptySquare()));
+        for (int i = 0; i < 30; i++) {
+            new Grass(map, map.getCoordinatesRandomEmptySquare());
+            new Rock(map, map.getCoordinatesRandomEmptySquare());
+            new Tree(map, map.getCoordinatesRandomEmptySquare());
         }
         for (int i = 0; i < 10; i++) {
-            map.addEntity(new Herbivore(map, map.getCoordinatesRandomEmptySquare()));
+            new Herbivore(map, map.getCoordinatesRandomEmptySquare());
         }
         for (int i = 0; i < 3; i++) {
-            map.addEntity(new Predator(map, map.getCoordinatesRandomEmptySquare()));
+            new Predator(map, map.getCoordinatesRandomEmptySquare());
         }
         renderer.render();
     }

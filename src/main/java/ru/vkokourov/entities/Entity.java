@@ -29,11 +29,16 @@ public abstract class Entity implements Mortal {
         this.coordinates = coordinates;
     }
 
-    public Creature getCreature() {
+    public Creature castCreature() {
         if (this instanceof Creature) {
             return (Creature) this;
         } else {
             return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
     }
 }
