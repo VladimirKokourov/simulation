@@ -2,6 +2,8 @@ package ru.vkokourov;
 
 import ru.vkokourov.entities.Entity;
 import ru.vkokourov.entities.creature.Creature;
+import ru.vkokourov.entities.creature.Herbivore;
+import ru.vkokourov.entities.creature.Predator;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -122,12 +124,20 @@ public class Map {
         return new Coordinates(x, y);
     }
 
-    public List<Creature> getAllCreatures() {
-        List<Creature> creatures = (entities.values().stream()
-                .filter(entity -> entity instanceof Creature)
-                .map(Entity::castCreature)
-                .toList());
-        return creatures.stream().map(Entity::castCreature).collect(Collectors.toList());
+    public List<Predator> getAllPredators() {
+        return entities.values()
+                .stream()
+                .filter(entity -> entity instanceof Predator)
+                .map(Entity::castPredator)
+                .toList();
+    }
+
+    public List<Herbivore> getAllHerbivors() {
+        return entities.values()
+                .stream()
+                .filter(entity -> entity instanceof Herbivore)
+                .map(Entity::castHerbivore)
+                .toList();
     }
 
     public int getWeight() {

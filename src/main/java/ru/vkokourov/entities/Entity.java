@@ -3,6 +3,8 @@ package ru.vkokourov.entities;
 import ru.vkokourov.Coordinates;
 import ru.vkokourov.Map;
 import ru.vkokourov.entities.creature.Creature;
+import ru.vkokourov.entities.creature.Herbivore;
+import ru.vkokourov.entities.creature.Predator;
 
 public abstract class Entity implements Mortal {
     protected final Map map;
@@ -29,9 +31,17 @@ public abstract class Entity implements Mortal {
         this.coordinates = coordinates;
     }
 
-    public Creature castCreature() {
-        if (this instanceof Creature) {
-            return (Creature) this;
+    public Predator castPredator() {
+        if (this instanceof Predator) {
+            return (Predator) this;
+        } else {
+            return null;
+        }
+    }
+
+    public Herbivore castHerbivore() {
+        if (this instanceof Herbivore) {
+            return (Herbivore) this;
         } else {
             return null;
         }
@@ -39,6 +49,9 @@ public abstract class Entity implements Mortal {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName();
+        return this.getClass().getSimpleName()
+                + " [" + coordinates.x()
+                + ", " + coordinates.y()
+                + "]";
     }
 }

@@ -2,7 +2,6 @@ package ru.vkokourov;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.vkokourov.entities.Entity;
 import ru.vkokourov.entities.Rock;
 import ru.vkokourov.entities.creature.Creature;
 import ru.vkokourov.entities.creature.Herbivore;
@@ -66,7 +65,7 @@ class MapTest {
         Predator predator = new Predator(map, new Coordinates(1,3));
         expected.add(herbivore);
         expected.add(predator);
-        assertIterableEquals(expected, map.getAllCreatures());
+        assertIterableEquals(expected, map.getAllPredators());
     }
 
 }

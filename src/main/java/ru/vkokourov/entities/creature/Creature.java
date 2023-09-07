@@ -57,10 +57,4 @@ public abstract class Creature extends Entity {
             getSatiety();
         }
     }
-
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName() + " " +
-                coordinates;
-    }
 }
