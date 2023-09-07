@@ -3,7 +3,7 @@ package ru.vkokourov.entities.creature;
 import ru.vkokourov.Coordinates;
 import ru.vkokourov.Map;
 import ru.vkokourov.entities.Entity;
-import ru.vkokourov.entities.Tombstone;
+import ru.vkokourov.entities.other.Tombstone;
 
 import java.util.Stack;
 

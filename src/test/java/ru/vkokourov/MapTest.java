@@ -2,7 +2,7 @@ package ru.vkokourov;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.vkokourov.entities.Rock;
+import ru.vkokourov.entities.other.Rock;
 import ru.vkokourov.entities.creature.Creature;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;

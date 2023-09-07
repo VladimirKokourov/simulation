@@ -123,19 +123,23 @@ public class Map {
     }
 
     public List<Predator> getAllPredators() {
-        return entities.values()
-                .stream()
-                .filter(entity -> entity instanceof Predator)
-                .map(Entity::castPredator)
-                .toList();
+        List<Predator> predators = new ArrayList<>();
+        for (Entity entity : entities.values()) {
+            if (entity instanceof Predator) {
+                predators.add((Predator) entity);
+            }
+        }
+        return predators;
     }
 
     public List<Herbivore> getAllHerbivores() {
-        return entities.values()
-                .stream()
-                .filter(entity -> entity instanceof Herbivore)
-                .map(Entity::castHerbivore)
-                .toList();
+        List<Herbivore> herbivores = new ArrayList<>();
+        for (Entity entity : entities.values()) {
+            if (entity instanceof Herbivore) {
+                herbivores.add((Herbivore) entity);
+            }
+        }
+        return herbivores;
     }
 
     public int getWeight() {

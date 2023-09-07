@@ -1,6 +1,6 @@
 package ru.vkokourov;
 
-import ru.vkokourov.entities.Rock;
+import ru.vkokourov.entities.other.Rock;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
 import ru.vkokourov.entities.plant.Grass;
