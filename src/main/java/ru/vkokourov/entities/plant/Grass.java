@@ -6,7 +6,7 @@ import ru.vkokourov.Map;
 public class Grass extends Plant {
     public Grass(Map map, Coordinates coordinates) {
         super(map, coordinates);
-        maxAge = 12;
+        maxAge = 15;
     }
 
     @Override

@@ -15,7 +15,7 @@ public class Tree extends Plant implements Alive {
         age++;
         if (age >= maxAge) {
             death();
-        } else if (age % 8 == 0) {
+        } else if (age % 9 == 0) {
             reproduce();
         }
     }

@@ -10,8 +10,8 @@ public class Predator extends Creature {
         speed = 3;
         amountOfMoves = speed;
         maxHunger = 25;
-        satiety = 8;
-        maxAge = 25;
+        satiety = 9;
+        maxAge = 30;
         reproduceAge = 5;
         reproduceHunger = 10;
         food = Herbivore.class;

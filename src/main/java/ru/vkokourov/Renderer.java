@@ -49,6 +49,6 @@ public class Renderer {
     }
 
     private String getSpriteForEmptySquare() {
-            return SYMBOL_FOR_EMPTY_SQUARE;
+        return SYMBOL_FOR_EMPTY_SQUARE;
     }
 }
