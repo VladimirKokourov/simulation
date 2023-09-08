@@ -21,7 +21,6 @@ public abstract class Creature extends Entity implements Alive {
 
     public Creature(Map map, Coordinates coordinates) {
         super(map, coordinates);
-        hunger = 5;
     }
 
     public void makeMove() {
@@ -80,12 +79,19 @@ public abstract class Creature extends Entity implements Alive {
 
     @Override
     public void reproduce() {
-        hunger += speed * 2;
+        hunger += speed * 3 / 2;
     }
 
     @Override
     public void death() {
         map.removeEntity(coordinates);
         new Tombstone(map, coordinates);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()
+                + " HUNGER-" + printNumber(hunger)
+                + "/" + maxHunger;
     }
 }

@@ -4,6 +4,7 @@ import ru.vkokourov.Coordinates;
 import ru.vkokourov.Map;
 
 public abstract class Entity {
+
     protected final Map map;
     protected Coordinates coordinates;
     protected int age;
@@ -27,8 +28,18 @@ public abstract class Entity {
     @Override
     public String toString() {
         return this.getClass().getSimpleName()
-                + " [" + coordinates.x()
-                + ", " + coordinates.y()
-                + "]";
+                + "[" + printNumber(coordinates.x())
+                + "," + printNumber(coordinates.y())
+                + "]"
+                + " AGE-" + printNumber(age)
+                + "/" + maxAge;
+    }
+
+    protected String printNumber(int number) {
+        if (number > 9) {
+            return String.valueOf(number);
+        } else {
+            return " " + number;
+        }
     }
 }

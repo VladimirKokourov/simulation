@@ -7,12 +7,13 @@ public class Predator extends Creature {
 
     public Predator(Map map, Coordinates coordinates) {
         super(map, coordinates);
+        hunger = 5;
         speed = 3;
         amountOfMoves = speed;
         maxHunger = 25;
         satiety = 9;
         maxAge = 30;
-        reproduceAge = 5;
+        reproduceAge = 6;
         reproduceHunger = 10;
         food = Herbivore.class;
     }

@@ -1,6 +1,10 @@
 package ru.vkokourov;
 
 import ru.vkokourov.entities.Entity;
+import ru.vkokourov.entities.creature.Herbivore;
+import ru.vkokourov.entities.creature.Predator;
+
+import java.util.List;
 
 public class Renderer {
 
@@ -29,7 +33,27 @@ public class Renderer {
                     sb.append(selectSpriteForEntity(map.getEntity(coordinates)));
                 }
             }
+            sb.append(" | ");
+            appendPredators(y, sb);
+            sb.append(" | ");
+            appendHerbivores(y, sb);
             System.out.println(sb);
+        }
+    }
+
+    private void appendPredators(int y, StringBuilder sb) {
+        List<Predator> allPredators = map.getAllPredators();
+        if (map.getHeight() - y < allPredators.size()) {
+            sb.append(allPredators.get(map.getHeight() - y));
+        } else {
+            sb.append("                                      ");
+        }
+    }
+
+    private void appendHerbivores(int y, StringBuilder sb) {
+        List<Herbivore> allHerbivores = map.getAllHerbivores();
+        if (map.getHeight() - y < allHerbivores.size()) {
+            sb.append(allHerbivores.get(map.getHeight() - y));
         }
     }
 

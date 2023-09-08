@@ -16,7 +16,7 @@ public class Simulation {
     private boolean isGameOver;
 
     public Simulation() {
-        map = new Map(30, 11);
+        map = new Map(30, 12);
         renderer = new Renderer(map);
         countTurn = 0;
         isGameOver = false;
@@ -39,13 +39,15 @@ public class Simulation {
             new Predator(map, map.getCoordinatesRandomEmptySquare());
         }
         renderer.render();
+        System.out.println();
     }
 
     public void makeTurn() {
+        countTurn++;
+
         for (Alive aliveEntity : map.getAliveEntities()) {
             aliveEntity.grow();
         }
-
         for (Herbivore herbivore : map.getAllHerbivores()) {
             herbivore.makeMove();
         }
@@ -55,14 +57,17 @@ public class Simulation {
         for (Tombstone tombstone : map.getAllTombstones()) {
             tombstone.destroy();
         }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Turn:").append(countTurn).append(" ");
+        sb.append("Predators:").append(map.getAllPredators().size()).append(" ");
+        sb.append("Herbivores:").append(map.getAllHerbivores().size()).append(" ");
+        System.out.println(sb);
         renderer.render();
-        countTurn++;
-        System.out.println("Turn " + countTurn);
-        System.out.println(map.getAllPredators().size());
-        System.out.println(map.getAllHerbivores().size());
+
         if (!map.isTypeOfEntityExist(Herbivore.class) || !map.isTypeOfEntityExist(Predator.class)) {
             isGameOver = true;
         }
+        System.out.println();
     }
 
     public boolean isGameOver() {
