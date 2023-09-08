@@ -43,6 +43,9 @@ public abstract class Creature extends Entity implements Alive {
             }
             amountOfMoves--;
         }
+        if (age >= maxAge || hunger >= maxHunger) {
+            death();
+        }
     }
 
     protected boolean isReadyToReproduce() {
@@ -72,9 +75,6 @@ public abstract class Creature extends Entity implements Alive {
     @Override
     public void grow() {
         age++;
-        if (age >= maxAge || hunger >= maxHunger) {
-            death();
-        }
     }
 
     @Override

@@ -36,7 +36,7 @@ public class Predator extends Creature {
                     .findFirst()
                     .ifPresent(reproduceCoordinates -> new Predator(map, reproduceCoordinates));
             hunger += speed;
-            partner.hunger += speed;
+            partner.hunger += speed * 2;
         }
     }
 }
