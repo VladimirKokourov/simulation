@@ -7,7 +7,7 @@ import ru.vkokourov.entities.Alive;
 public class Tree extends Plant implements Alive {
     public Tree(Map map, Coordinates coordinates) {
         super(map, coordinates);
-        maxAge = 24;
+        maxAge = 30;
     }
 
     @Override
@@ -15,7 +15,7 @@ public class Tree extends Plant implements Alive {
         age++;
         if (age >= maxAge) {
             death();
-        } else if (age % 6 == 0) {
+        } else if (age % 8 == 0) {
             reproduce();
         }
     }

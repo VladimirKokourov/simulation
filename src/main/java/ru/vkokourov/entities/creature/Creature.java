@@ -15,6 +15,8 @@ public abstract class Creature extends Entity implements Alive {
     protected int hunger;
     protected int maxHunger;
     protected int satiety;
+    protected int reproduceAge;
+    protected int reproduceHunger;
     protected Class<? extends Entity> food;
 
     public Creature(Map map, Coordinates coordinates) {
@@ -23,11 +25,9 @@ public abstract class Creature extends Entity implements Alive {
     }
 
     public void makeMove() {
-        if (!map.isTypeOfEntityExist(food)) {
-            return;
-        }
         amountOfMoves = speed;
         while (amountOfMoves > 0) {
+            hunger++;
             // decide priority goal for going
             Class<? extends Entity> goal = isReadyToReproduce() ? this.getClass() : food;
 
@@ -46,8 +46,8 @@ public abstract class Creature extends Entity implements Alive {
         }
     }
 
-    private boolean isReadyToReproduce() {
-        return age > 5 && hunger < 10;
+    protected boolean isReadyToReproduce() {
+        return age > reproduceAge && hunger < reproduceHunger;
     }
 
     protected void eat(Class<? extends Entity> foodClazz) {
@@ -72,11 +72,15 @@ public abstract class Creature extends Entity implements Alive {
 
     @Override
     public void grow() {
-        hunger += speed;
         age++;
         if (age >= maxAge || hunger >= maxHunger) {
             death();
         }
+    }
+
+    @Override
+    public void reproduce() {
+        hunger += speed * 2;
     }
 
     @Override
