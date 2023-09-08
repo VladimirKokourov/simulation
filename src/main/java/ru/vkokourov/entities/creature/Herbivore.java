@@ -21,12 +21,12 @@ public class Herbivore extends Creature {
 
     @Override
     public void reproduce() {
-        super.reproduce();
         if (map.getNeighbours(coordinates).stream().anyMatch(c -> map.isTypeOfEntityOnTheCoordinates(Herbivore.class, c))) {
             map.getNeighbours(coordinates).stream()
                     .filter(map::isEmptySquare)
                     .findFirst()
                     .ifPresent(reproduceCoordinates -> new Herbivore(map, reproduceCoordinates));
+            hunger += speed;
         }
     }
 }

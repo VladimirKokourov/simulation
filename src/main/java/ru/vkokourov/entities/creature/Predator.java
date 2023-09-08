@@ -12,7 +12,7 @@ public class Predator extends Creature {
         amountOfMoves = speed;
         maxHunger = 25;
         satiety = 9;
-        maxAge = 30;
+        maxAge = 25;
         reproduceAge = 6;
         reproduceHunger = 10;
         food = Herbivore.class;
@@ -20,7 +20,6 @@ public class Predator extends Creature {
 
     @Override
     public void reproduce() {
-        super.reproduce();
         Coordinates partnerCoordinates = map.getNeighbours(this.coordinates)
                 .stream()
                 .filter(c -> map.isTypeOfEntityOnTheCoordinates(Predator.class, c))
@@ -36,6 +35,8 @@ public class Predator extends Creature {
                     .filter(map::isEmptySquare)
                     .findFirst()
                     .ifPresent(reproduceCoordinates -> new Predator(map, reproduceCoordinates));
+            hunger += speed;
+            partner.hunger += speed;
         }
     }
 }

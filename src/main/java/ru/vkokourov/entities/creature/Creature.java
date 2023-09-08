@@ -78,11 +78,6 @@ public abstract class Creature extends Entity implements Alive {
     }
 
     @Override
-    public void reproduce() {
-        hunger += speed * 3 / 2;
-    }
-
-    @Override
     public void death() {
         map.removeEntity(coordinates);
         new Tombstone(map, coordinates);

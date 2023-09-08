@@ -57,11 +57,9 @@ public class Simulation {
         for (Tombstone tombstone : map.getAllTombstones()) {
             tombstone.destroy();
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append("Turn:").append(countTurn).append(" ");
-        sb.append("Predators:").append(map.getAllPredators().size()).append(" ");
-        sb.append("Herbivores:").append(map.getAllHerbivores().size()).append(" ");
-        System.out.println(sb);
+        System.out.println("Turn:" + countTurn + " " +
+                "Predators:" + map.getAllPredators().size() + " " +
+                "Herbivores:" + map.getAllHerbivores().size() + " ");
         renderer.render();
 
         if (!map.isTypeOfEntityExist(Herbivore.class) || !map.isTypeOfEntityExist(Predator.class)) {
