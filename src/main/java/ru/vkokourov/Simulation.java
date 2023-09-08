@@ -4,6 +4,7 @@ import ru.vkokourov.entities.Alive;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
 import ru.vkokourov.entities.other.Rock;
+import ru.vkokourov.entities.other.Tombstone;
 import ru.vkokourov.entities.plant.Grass;
 import ru.vkokourov.entities.plant.Tree;
 
@@ -15,19 +16,23 @@ public class Simulation {
     private boolean isGameOver;
 
     public Simulation() {
-        map = new Map(30, 10);
+        map = new Map(30, 11);
         renderer = new Renderer(map);
         countTurn = 0;
         isGameOver = false;
     }
 
     public void init() {
-        for (int i = 0; i < 15; i++) {
-            new Grass(map, map.getCoordinatesRandomEmptySquare());
+        for (int i = 0; i < 12; i++) {
             new Rock(map, map.getCoordinatesRandomEmptySquare());
+        }
+        for (int i = 0; i < 20; i++) {
             new Tree(map, map.getCoordinatesRandomEmptySquare());
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 25; i++) {
+            new Grass(map, map.getCoordinatesRandomEmptySquare());
+        }
+        for (int i = 0; i < 12; i++) {
             new Herbivore(map, map.getCoordinatesRandomEmptySquare());
         }
         for (int i = 0; i < 2; i++) {
@@ -46,6 +51,9 @@ public class Simulation {
         }
         for (Predator predator : map.getAllPredators()) {
             predator.makeMove();
+        }
+        for (Tombstone tombstone : map.getAllTombstones()) {
+            tombstone.destroy();
         }
         renderer.render();
         countTurn++;

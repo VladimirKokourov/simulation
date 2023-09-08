@@ -4,6 +4,7 @@ import ru.vkokourov.entities.Alive;
 import ru.vkokourov.entities.Entity;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
+import ru.vkokourov.entities.other.Tombstone;
 
 import java.util.*;
 
@@ -151,6 +152,16 @@ public class Map {
             }
         }
         return herbivores;
+    }
+
+    public List<Tombstone> getAllTombstones() {
+        List<Tombstone> tombstones = new ArrayList<>();
+        for (Entity entity : entities.values()) {
+            if (entity instanceof Tombstone) {
+                tombstones.add((Tombstone) entity);
+            }
+        }
+        return tombstones;
     }
 
     public int getWeight() {
