@@ -1,4 +1,4 @@
-package ru.vkokourov;
+package ru.vkokourov.map;
 
 import java.util.Objects;
 

@@ -1,7 +1,7 @@
 package ru.vkokourov.entities;
 
-import ru.vkokourov.Coordinates;
-import ru.vkokourov.Map;
+import ru.vkokourov.map.Coordinates;
+import ru.vkokourov.map.Map;
 
 public abstract class Entity {
 

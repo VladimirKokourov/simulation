@@ -1,8 +1,10 @@
-package ru.vkokourov;
+package ru.vkokourov.simulation;
 
 import ru.vkokourov.entities.Entity;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
+import ru.vkokourov.map.Coordinates;
+import ru.vkokourov.map.Map;
 
 import java.util.List;
 
@@ -39,6 +41,7 @@ public class Renderer {
             appendHerbivores(y, sb);
             System.out.println(sb);
         }
+        System.out.println();
     }
 
     private void appendPredators(int y, StringBuilder sb) {

@@ -1,7 +1,7 @@
 package ru.vkokourov.entities.creature;
 
-import ru.vkokourov.Coordinates;
-import ru.vkokourov.Map;
+import ru.vkokourov.map.Coordinates;
+import ru.vkokourov.map.Map;
 
 public class Predator extends Creature {
 
@@ -14,7 +14,7 @@ public class Predator extends Creature {
         satiety = 9;
         maxAge = 25;
         reproduceAge = 6;
-        reproduceHunger = 10;
+        reproduceHunger = 8;
         food = Herbivore.class;
     }
 

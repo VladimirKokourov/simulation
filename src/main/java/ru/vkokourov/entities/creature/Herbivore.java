@@ -1,8 +1,8 @@
 package ru.vkokourov.entities.creature;
 
-import ru.vkokourov.Coordinates;
-import ru.vkokourov.Map;
 import ru.vkokourov.entities.plant.Grass;
+import ru.vkokourov.map.Coordinates;
+import ru.vkokourov.map.Map;
 
 public class Herbivore extends Creature {
 

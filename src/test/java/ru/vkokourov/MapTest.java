@@ -7,6 +7,8 @@ import ru.vkokourov.entities.creature.Creature;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
 import ru.vkokourov.entities.plant.Grass;
+import ru.vkokourov.map.Coordinates;
+import ru.vkokourov.map.Map;
 
 import java.util.ArrayList;
 import java.util.List;

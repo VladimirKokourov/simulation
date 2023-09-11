@@ -1,4 +1,4 @@
-package ru.vkokourov;
+package ru.vkokourov.map;
 
 import ru.vkokourov.entities.Alive;
 import ru.vkokourov.entities.Entity;

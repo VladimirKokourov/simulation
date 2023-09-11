@@ -1,4 +1,4 @@
-package ru.vkokourov;
+package ru.vkokourov.simulation;
 
 import ru.vkokourov.entities.Alive;
 import ru.vkokourov.entities.creature.Herbivore;
@@ -7,6 +7,7 @@ import ru.vkokourov.entities.other.Rock;
 import ru.vkokourov.entities.other.Tombstone;
 import ru.vkokourov.entities.plant.Grass;
 import ru.vkokourov.entities.plant.Tree;
+import ru.vkokourov.map.Map;
 
 public class Simulation {
 
@@ -39,7 +40,6 @@ public class Simulation {
             new Predator(map, map.getCoordinatesRandomEmptySquare());
         }
         renderer.render();
-        System.out.println();
     }
 
     public void makeTurn() {
@@ -65,7 +65,6 @@ public class Simulation {
         if (!map.isTypeOfEntityExist(Herbivore.class) || !map.isTypeOfEntityExist(Predator.class)) {
             isGameOver = true;
         }
-        System.out.println();
     }
 
     public boolean isGameOver() {

@@ -1,8 +1,8 @@
 package ru.vkokourov.entities.other;
 
-import ru.vkokourov.Coordinates;
-import ru.vkokourov.Map;
 import ru.vkokourov.entities.Entity;
+import ru.vkokourov.map.Coordinates;
+import ru.vkokourov.map.Map;
 
 public class Rock extends Entity {
     public Rock(Map map, Coordinates coordinates) {
