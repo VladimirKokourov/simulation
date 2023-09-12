@@ -11,17 +11,14 @@ import ru.vkokourov.map.Map;
 
 public class Simulation {
 
-    private final Map map;
-    private final Renderer renderer;
+    private Renderer renderer;
+    private Map map;
     private int countTurn;
     private boolean isGameOver;
 
-    public Simulation() {
+    public void init() {
         map = new Map(30, 12);
         renderer = new Renderer(map);
-    }
-
-    public void init() {
         isGameOver = false;
         countTurn = 0;
         for (int i = 0; i < 12; i++) {
@@ -62,7 +59,11 @@ public class Simulation {
                 "Herbivores:" + map.getAllHerbivores().size() + " ");
         renderer.render();
 
-        if (!map.isTypeOfEntityExist(Herbivore.class) || !map.isTypeOfEntityExist(Predator.class)) {
+        if (!map.isTypeOfEntityExist(Herbivore.class)) {
+            System.out.println("Predators WIN!");
+            isGameOver = true;
+        } else if (!map.isTypeOfEntityExist(Predator.class)) {
+            System.out.println("Herbivores WIN!");
             isGameOver = true;
         }
     }
