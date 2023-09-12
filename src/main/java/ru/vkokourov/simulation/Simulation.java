@@ -19,11 +19,11 @@ public class Simulation {
     public Simulation() {
         map = new Map(30, 12);
         renderer = new Renderer(map);
-        countTurn = 0;
-        isGameOver = false;
     }
 
     public void init() {
+        isGameOver = false;
+        countTurn = 0;
         for (int i = 0; i < 12; i++) {
             new Rock(map, map.getCoordinatesRandomEmptySquare());
         }

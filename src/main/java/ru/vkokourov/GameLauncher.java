@@ -26,10 +26,18 @@ public class GameLauncher {
         }
 
         Simulation simulation = new Simulation();
-        simulation.init();
-        while (!simulation.isGameOver()) {
-            Thread.sleep(300);
-            simulation.makeTurn();
+        while (!enter.equals("2")) {
+            simulation.init();
+            while (!simulation.isGameOver()) {
+                Thread.sleep(300);
+                simulation.makeTurn();
+            }
+            do {
+                System.out.println("Хотите сыграть еще?");
+                System.out.println("Введите (1) для старта, (2) для выхода:");
+                enter = scanner.next();
+            } while (!enter.matches("[12]"));
         }
+
     }
 }
