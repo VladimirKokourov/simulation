@@ -19,16 +19,16 @@ public class Simulation {
     private int countTurn;
     private boolean isGameOver;
 
-    public Simulation() {
-        addAllCreateActions();
-        addAllTurnActions();
-    }
-
     public void init() {
         map = new Map(30, 12);
         renderer = new Renderer(map);
         isGameOver = false;
         countTurn = 0;
+
+        createActions.clear();
+        addAllCreateActions();
+        turnActions.clear();
+        addAllTurnActions();
 
         createActions.forEach(CreateAction::create);
 
