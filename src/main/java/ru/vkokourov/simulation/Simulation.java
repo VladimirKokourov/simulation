@@ -1,6 +1,10 @@
 package ru.vkokourov.simulation;
 
 import ru.vkokourov.action.create.*;
+import ru.vkokourov.action.turn.AliveTurnAction;
+import ru.vkokourov.action.turn.CreaturesTurnAction;
+import ru.vkokourov.action.turn.TombstoneTurnAction;
+import ru.vkokourov.action.turn.TurnAction;
 import ru.vkokourov.entities.Alive;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
@@ -42,18 +46,16 @@ public class Simulation {
     public void makeTurn() {
         countTurn++;
 
-        for (Alive aliveEntity : map.getAliveEntities()) {
-            aliveEntity.grow();
-        }
-        for (Herbivore herbivore : map.getAllHerbivores()) {
-            herbivore.makeMove();
-        }
-        for (Predator predator : map.getAllPredators()) {
-            predator.makeMove();
-        }
-        for (Tombstone tombstone : map.getAllTombstones()) {
-            tombstone.destroy();
-        }
+        TurnAction turnAction;
+        turnAction = new AliveTurnAction(map);
+        turnAction.makeTurn();
+
+        turnAction = new CreaturesTurnAction(map);
+        turnAction.makeTurn();
+
+        turnAction = new TombstoneTurnAction(map);
+        turnAction.makeTurn();
+
         System.out.println("Turn:" + countTurn + " " +
                 "Predators:" + map.getAllPredators().size() + " " +
                 "Herbivores:" + map.getAllHerbivores().size() + " ");
