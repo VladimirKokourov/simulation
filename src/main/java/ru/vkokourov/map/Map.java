@@ -127,8 +127,8 @@ public class Map {
     public List<Alive> getAliveEntities() {
         List<Alive> aliveEntities = new ArrayList<>();
         for (Entity entity : entities.values()) {
-            if (entity instanceof Alive) {
-                aliveEntities.add((Alive) entity);
+            if (entity instanceof Alive alive) {
+                aliveEntities.add(alive);
             }
         }
         return aliveEntities;
@@ -137,8 +137,8 @@ public class Map {
     public List<Predator> getAllPredators() {
         List<Predator> predators = new ArrayList<>();
         for (Entity entity : entities.values()) {
-            if (entity instanceof Predator) {
-                predators.add((Predator) entity);
+            if (entity instanceof Predator predator) {
+                predators.add(predator);
             }
         }
         return predators;
@@ -147,8 +147,8 @@ public class Map {
     public List<Herbivore> getAllHerbivores() {
         List<Herbivore> herbivores = new ArrayList<>();
         for (Entity entity : entities.values()) {
-            if (entity instanceof Herbivore) {
-                herbivores.add((Herbivore) entity);
+            if (entity instanceof Herbivore herbivore) {
+                herbivores.add(herbivore);
             }
         }
         return herbivores;
@@ -157,8 +157,8 @@ public class Map {
     public List<Tombstone> getAllTombstones() {
         List<Tombstone> tombstones = new ArrayList<>();
         for (Entity entity : entities.values()) {
-            if (entity instanceof Tombstone) {
-                tombstones.add((Tombstone) entity);
+            if (entity instanceof Tombstone tombstone) {
+                tombstones.add(tombstone);
             }
         }
         return tombstones;
