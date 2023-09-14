@@ -1,12 +1,10 @@
 package ru.vkokourov.simulation;
 
+import ru.vkokourov.action.create.*;
 import ru.vkokourov.entities.Alive;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
-import ru.vkokourov.entities.other.Rock;
 import ru.vkokourov.entities.other.Tombstone;
-import ru.vkokourov.entities.plant.Grass;
-import ru.vkokourov.entities.plant.Tree;
 import ru.vkokourov.map.Map;
 
 public class Simulation {
@@ -21,21 +19,23 @@ public class Simulation {
         renderer = new Renderer(map);
         isGameOver = false;
         countTurn = 0;
-        for (int i = 0; i < 12; i++) {
-            new Rock(map, map.getCoordinatesRandomEmptySquare());
-        }
-        for (int i = 0; i < 20; i++) {
-            new Tree(map, map.getCoordinatesRandomEmptySquare());
-        }
-        for (int i = 0; i < 25; i++) {
-            new Grass(map, map.getCoordinatesRandomEmptySquare());
-        }
-        for (int i = 0; i < 12; i++) {
-            new Herbivore(map, map.getCoordinatesRandomEmptySquare());
-        }
-        for (int i = 0; i < 2; i++) {
-            new Predator(map, map.getCoordinatesRandomEmptySquare());
-        }
+
+        CreateAction createAction;
+        createAction = new RockCreateAction(map);
+        createAction.create(12);
+
+        createAction = new TreeCreateAction(map);
+        createAction.create(20);
+
+        createAction = new GrassCreateAction(map);
+        createAction.create(25);
+
+        createAction = new HerbivoreCreateAction(map);
+        createAction.create(12);
+
+        createAction = new PredatorCreateAction(map);
+        createAction.create(2);
+
         renderer.render();
     }
 
