@@ -1,22 +1,28 @@
 package ru.vkokourov.simulation;
 
 import ru.vkokourov.action.create.*;
-import ru.vkokourov.action.turn.AliveTurnAction;
-import ru.vkokourov.action.turn.CreaturesTurnAction;
-import ru.vkokourov.action.turn.TombstoneTurnAction;
-import ru.vkokourov.action.turn.TurnAction;
-import ru.vkokourov.entities.Alive;
+import ru.vkokourov.action.turn.*;
 import ru.vkokourov.entities.creature.Herbivore;
 import ru.vkokourov.entities.creature.Predator;
-import ru.vkokourov.entities.other.Tombstone;
 import ru.vkokourov.map.Map;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Simulation {
+
+    private final List<CreateAction> createActions = new ArrayList<>();
+    private final List<TurnAction> turnActions = new ArrayList<>();
 
     private Renderer renderer;
     private Map map;
     private int countTurn;
     private boolean isGameOver;
+
+    public Simulation() {
+        addAllCreateActions();
+        addAllTurnActions();
+    }
 
     public void init() {
         map = new Map(30, 12);
@@ -24,21 +30,7 @@ public class Simulation {
         isGameOver = false;
         countTurn = 0;
 
-        CreateAction createAction;
-        createAction = new RockCreateAction(map);
-        createAction.create(12);
-
-        createAction = new TreeCreateAction(map);
-        createAction.create(20);
-
-        createAction = new GrassCreateAction(map);
-        createAction.create(25);
-
-        createAction = new HerbivoreCreateAction(map);
-        createAction.create(12);
-
-        createAction = new PredatorCreateAction(map);
-        createAction.create(2);
+        createActions.forEach(CreateAction::create);
 
         renderer.render();
     }
@@ -46,19 +38,9 @@ public class Simulation {
     public void makeTurn() {
         countTurn++;
 
-        TurnAction turnAction;
-        turnAction = new AliveTurnAction(map);
-        turnAction.makeTurn();
+        turnActions.forEach(TurnAction::makeTurn);
 
-        turnAction = new CreaturesTurnAction(map);
-        turnAction.makeTurn();
-
-        turnAction = new TombstoneTurnAction(map);
-        turnAction.makeTurn();
-
-        System.out.println("Turn:" + countTurn + " " +
-                "Predators:" + map.getAllPredators().size() + " " +
-                "Herbivores:" + map.getAllHerbivores().size() + " ");
+        renderer.printCountTurn(countTurn);
         renderer.render();
 
         if (!map.isTypeOfEntityExist(Herbivore.class)) {
@@ -68,6 +50,21 @@ public class Simulation {
             System.out.println("Herbivores WIN!");
             isGameOver = true;
         }
+    }
+
+    private void addAllCreateActions() {
+        createActions.add(new RockCreateAction(map, 12));
+        createActions.add(new TreeCreateAction(map, 20));
+        createActions.add(new GrassCreateAction(map, 25));
+        createActions.add(new HerbivoreCreateAction(map, 12));
+        createActions.add(new PredatorCreateAction(map, 2));
+    }
+
+    private void addAllTurnActions() {
+        turnActions.add(new AliveTurnAction(map));
+        turnActions.add(new HerbivoreTurnAction(map));
+        turnActions.add(new PredatorTurnAction(map));
+        turnActions.add(new TombstoneTurnAction(map));
     }
 
     public boolean isGameOver() {

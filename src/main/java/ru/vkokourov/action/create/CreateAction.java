@@ -5,9 +5,12 @@ import ru.vkokourov.map.Map;
 
 public abstract class CreateAction extends Action {
 
-    public CreateAction(Map map) {
+    protected int amount;
+
+    public CreateAction(Map map, int amount) {
         super(map);
+        this.amount = amount;
     }
 
-    public abstract void create(int amount);
+    public abstract void create();
 }

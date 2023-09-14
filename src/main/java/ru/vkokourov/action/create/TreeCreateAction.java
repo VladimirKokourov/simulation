@@ -5,12 +5,12 @@ import ru.vkokourov.map.Map;
 
 public class TreeCreateAction extends CreateAction {
 
-    public TreeCreateAction(Map map) {
-        super(map);
+    public TreeCreateAction(Map map, int amount) {
+        super(map, amount);
     }
 
     @Override
-    public void create(int amount) {
+    public void create() {
         for (int i = 0; i < amount; i++) {
             new Tree(map, map.getCoordinatesRandomEmptySquare());
         }

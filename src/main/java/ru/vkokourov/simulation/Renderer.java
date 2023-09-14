@@ -44,6 +44,12 @@ public class Renderer {
         System.out.println();
     }
 
+    public void printCountTurn(int countTurn) {
+        System.out.println("Turn:" + countTurn + " " +
+                "Predators:" + map.getAllPredators().size() + " " +
+                "Herbivores:" + map.getAllHerbivores().size() + " ");
+    }
+
     private void appendPredators(int y, StringBuilder sb) {
         List<Predator> allPredators = map.getAllPredators();
         if (map.getHeight() - y < allPredators.size()) {
